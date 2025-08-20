@@ -8,11 +8,11 @@ type Numeric interface {
 	constraints.Signed | constraints.Unsigned | ~float32 | ~float64
 }
 
-// Generic interpolation search returning value and bool
-func GenericInterpolationSearch[T Numeric](arr []T, x T) (T, bool) {
-	var zero T
+// GenericInterpolationSearch takes a sorted array satisfying the Numeric interface
+// and returns the index of element and true if found.
+func NumericInterpolationSearch[T Numeric](arr []T, x T) (int, bool) {
 	if len(arr) == 0 {
-		return zero, false
+		return -1, false
 	}
 
 	low := 0
@@ -21,15 +21,22 @@ func GenericInterpolationSearch[T Numeric](arr []T, x T) (T, bool) {
 	for low <= high && x >= arr[low] && x <= arr[high] {
 		if low == high {
 			if arr[low] == x {
-				return arr[low], true
+				return low, true
 			}
-			return zero, false
+			return -1, false
 		}
 
+		// interpolated position.
 		pos := low + int(float64(x-arr[low])*float64(high-low)/float64(arr[high]-arr[low]))
 
+		if pos < low {
+			pos = low
+		} else if pos > high {
+			pos = high
+		}
+
 		if arr[pos] == x {
-			return arr[pos], true
+			return pos, true
 		}
 
 		if arr[pos] < x {
@@ -39,5 +46,5 @@ func GenericInterpolationSearch[T Numeric](arr []T, x T) (T, bool) {
 		}
 	}
 
-	return zero, false
+	return -1, false
 }

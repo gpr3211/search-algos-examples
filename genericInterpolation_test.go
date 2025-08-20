@@ -17,7 +17,7 @@ func BenchmarkGenericInterpolationSearch(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		target := rand.Intn(dataSize)
-		_, _ = GenericInterpolationSearch(items, target)
+		_, _ = NumericInterpolationSearch(items, target)
 	}
 }
 
@@ -26,7 +26,7 @@ func BenchmarkGenericInterpolationSearchRandom(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		target := rand.Intn(dataSize)
-		_, _ = GenericInterpolationSearch(items, target)
+		_, _ = NumericInterpolationSearch(items, target)
 	}
 }
 
@@ -35,7 +35,7 @@ func BenchmarkGenericInterpolationSearchUniformJitter(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		target := rand.Intn(dataSize)
-		_, _ = GenericInterpolationSearch(items, target)
+		_, _ = NumericInterpolationSearch(items, target)
 	}
 }
 
@@ -44,7 +44,6 @@ func BenchmarkGenericInterpolationSearchSkewed(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		target := rand.Intn(dataSize)
-		_, _ = GenericInterpolationSearch(items, target)
+		_, _ = NumericInterpolationSearch(items, target)
 	}
 }
-
